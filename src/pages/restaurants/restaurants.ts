@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { IonicPage, NavController, Platform, AlertController } from 'ionic-angular';
+import { GoogleMapsProvider } from '../../providers/google-maps/google-maps';
+import { DataServiceProvider } from '../../providers/data-service/data-service';
+import { Geolocation } from '@ionic-native/geolocation';
+
+
 
 /**
- * Generated class for the RestaurantsPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * Class for the Restaurants page. This will enable a user to search
+ * and navigate to a child page for Restaurant details.
+ * Trusted GF Life App - V0.1
+ * Adam Sellers - asellers@salesforce.com
+ * 11th JUne 2017
  */
+
 @IonicPage()
 @Component({
   selector: 'page-restaurants',
@@ -14,11 +21,39 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RestaurantsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  //setup properties required for this class first
+  @ViewChild('map') mapElement: ElementRef;
+  @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
+
+  latitude: number;
+  longitude: number;
+
+  constructor(public navController: NavController, public alertController: AlertController, public platform: Platform,
+  public googleMaps: GoogleMapsProvider, public dataService: DataServiceProvider) {
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RestaurantsPage');
+  ionViewDidLoad(): void {
+    //load the google maps bit
+
+    this.googleMaps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement).then(() => {
+
+      //this.googleMaps.changeMarker(this.latitude, this.longitude);
+
+    });
+
   }
+
+  findRestaurants(): void {
+    console.log('find restaurants has been clicked');
+
+  }
+
+  newRestaurant(): void {
+    console.log('new restaurant has been clicked');
+
+  }
+
+
 
 }

@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -12,6 +13,7 @@ import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { ChatterServiceProvider } from '../providers/chatter-service/chatter-service';
 import { AuthenticationServiceProvider } from '../providers/authentication-service/authentication-service';
+import { ConnectivityProvider } from '../providers/connectivity/connectivity';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { AuthenticationServiceProvider } from '../providers/authentication-servi
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -36,7 +39,8 @@ import { AuthenticationServiceProvider } from '../providers/authentication-servi
     GoogleMapsProvider,
     DataServiceProvider,
     ChatterServiceProvider,
-    AuthenticationServiceProvider
+    AuthenticationServiceProvider,
+    ConnectivityProvider
   ]
 })
 export class AppModule {}
