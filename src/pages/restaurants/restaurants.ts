@@ -1,8 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { IonicPage, NavController, Platform, AlertController } from 'ionic-angular';
 import { GoogleMapsProvider } from '../../providers/google-maps/google-maps';
-import { DataServiceProvider } from '../../providers/data-service/data-service';
+import { RestaurantServiceProvider } from '../../providers/restaurant-service/restaurant-service';
 import { Geolocation } from '@ionic-native/geolocation';
+
 
 
 
@@ -29,7 +30,7 @@ export class RestaurantsPage {
   longitude: number;
 
   constructor(public navController: NavController, public alertController: AlertController, public platform: Platform,
-  public googleMaps: GoogleMapsProvider, public dataService: DataServiceProvider) {
+  public googleMaps: GoogleMapsProvider, public restaurantService: RestaurantServiceProvider) {
 
   }
 
@@ -45,12 +46,21 @@ export class RestaurantsPage {
   }
 
   findRestaurants(): void {
-    console.log('find restaurants has been clicked');
+    this.restaurantService.findRestaurants().then((response) => {
+      console.log('response is: ' + JSON.stringify(response));
+
+    });
 
   }
 
   newRestaurant(): void {
     console.log('new restaurant has been clicked');
+
+  }
+
+  testContacts() {
+
+
 
   }
 

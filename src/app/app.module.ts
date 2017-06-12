@@ -6,14 +6,17 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Keyboard } from '@ionic-native/keyboard';
+import {IonicStorageModule, Storage} from '@ionic/storage';
 import { Network } from '@ionic-native/network';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { MyApp } from './app.component';
 import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
-import { DataServiceProvider } from '../providers/data-service/data-service';
 import { ChatterServiceProvider } from '../providers/chatter-service/chatter-service';
 import { AuthenticationServiceProvider } from '../providers/authentication-service/authentication-service';
 import { ConnectivityProvider } from '../providers/connectivity/connectivity';
+import { RestaurantServiceProvider } from '../providers/restaurant-service/restaurant-service';
+import { IngredientServiceProvider } from '../providers/ingredient-service/ingredient-service';
+import { UserServiceProvider } from '../providers/user-service/user-service';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,8 @@ import { ConnectivityProvider } from '../providers/connectivity/connectivity';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -37,10 +41,12 @@ import { ConnectivityProvider } from '../providers/connectivity/connectivity';
     Network,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GoogleMapsProvider,
-    DataServiceProvider,
     ChatterServiceProvider,
     AuthenticationServiceProvider,
-    ConnectivityProvider
+    ConnectivityProvider,
+    RestaurantServiceProvider,
+    IngredientServiceProvider,
+    UserServiceProvider
   ]
 })
 export class AppModule {}
