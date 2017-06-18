@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { DataService } from 'forcejs';
-import { Storage } from '@ionic/storage';
-
+import {Injectable} from '@angular/core';
+import {DataService} from 'forcejs';
+import {Storage} from '@ionic/storage';
 
 /*
  * Service to get information on restaurants from SF.
-*/
+ */
 @Injectable()
 export class RestaurantServiceProvider {
 
   //properties required for the class
   service: any;
+  restaurants: any;
 
   constructor(public storage: Storage) {
 
@@ -24,21 +24,18 @@ export class RestaurantServiceProvider {
     return {
 
       id: restaurants.id,
-      Name: restaurants.Name,
-
-
-
+      name: restaurants.Name
 
     }
 
   }
 
-  findRestaurants() {
+  findRestaurants(): Promise<any> {
 
-    return this.service.query(`SELECT Id, Name, geolocation__c 
-                               FROM Restaurant__c
-                               ORDER BY Name`);
-     // .then(response => response.records.map(this.cleanRestaurants));
+    this.restaurants = this.service.query(`SELECT id, Name from Restaurant__c`)
+      .then(response => response.records.map(this.cleanRestaurants));
+
+    return this.restaurants;
 
   }
 

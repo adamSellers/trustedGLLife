@@ -1,11 +1,8 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { IonicPage, NavController, Platform, AlertController } from 'ionic-angular';
-import { GoogleMapsProvider } from '../../providers/google-maps/google-maps';
-import { RestaurantServiceProvider } from '../../providers/restaurant-service/restaurant-service';
-import { Geolocation } from '@ionic-native/geolocation';
-
-
-
+import {Component, ElementRef, ViewChild} from '@angular/core';
+import {IonicPage, NavController, Platform, AlertController} from 'ionic-angular';
+import {GoogleMapsProvider} from '../../providers/google-maps/google-maps';
+import {RestaurantServiceProvider} from '../../providers/restaurant-service/restaurant-service';
+import {AuthenticationServiceProvider} from '../../providers/authentication-service/authentication-service';
 
 /**
  * Class for the Restaurants page. This will enable a user to search
@@ -28,9 +25,10 @@ export class RestaurantsPage {
 
   latitude: number;
   longitude: number;
+  restaurantData: any;
 
   constructor(public navController: NavController, public alertController: AlertController, public platform: Platform,
-  public googleMaps: GoogleMapsProvider, public restaurantService: RestaurantServiceProvider) {
+              public googleMaps: GoogleMapsProvider, public restaurantService: RestaurantServiceProvider, public auth: AuthenticationServiceProvider) {
 
   }
 
@@ -46,11 +44,12 @@ export class RestaurantsPage {
   }
 
   findRestaurants(): void {
-    this.restaurantService.findRestaurants().then((response) => {
-      console.log('response is: ' + JSON.stringify(response));
+    this.restaurantData = this.restaurantService.findRestaurants().then(() => {
+
+
+      console.log('response is: ' + JSON.stringify(this.restaurantData));
 
     });
-
   }
 
   newRestaurant(): void {
@@ -58,12 +57,11 @@ export class RestaurantsPage {
 
   }
 
-  testContacts() {
+  login() {
 
-
+    this.auth.login2SF();
 
   }
-
 
 
 }

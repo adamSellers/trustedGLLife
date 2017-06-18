@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Keyboard } from '@ionic-native/keyboard';
-import {IonicStorageModule, Storage} from '@ionic/storage';
+import {IonicStorageModule} from '@ionic/storage';
 import { Network } from '@ionic-native/network';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { MyApp } from './app.component';

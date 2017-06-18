@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
+
 
 /**
- * Generated class for the ProfilePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * User Profile page for TrustedGF Life.
+ * User information will be taken from Salesforce User info.
+ * (Need to figure out if contact or user info is right for this
+ * as it will be a community license in the end)
+ * Adam Sellers - asellers@salesforce.com
  */
 @IonicPage()
 @Component({
@@ -14,11 +17,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  userData: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
+              public userService: UserServiceProvider) {
+
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+    this.userData = this.userService.getUserData();
+
+    console.log('user data is: ' + JSON.stringify(this.userData));
   }
 
 }
