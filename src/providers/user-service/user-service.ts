@@ -14,16 +14,20 @@ import 'rxjs/add/operator/map';
 export class UserServiceProvider {
 
   service: any;
+  userId: string;
 
   constructor(public storage: Storage) {
 
     this.service = DataService.getInstance();
+    this.userId = this.service.getUserId();
 
   }
 
   getUserData() {
 
-    return this.service.query(`SELECT Id, Username from User`)
+    let soql: string = "SELECT Id, Username from User WHERE Id='" + this.userId +"'";
+
+    return this.service.query(soql)
       .then(response => response.records.map(this.cleanUserData));
 
   }

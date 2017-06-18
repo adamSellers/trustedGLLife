@@ -20,7 +20,6 @@ export class AuthenticationServiceProvider {
   public loginString: string = 'https://login.salesforce.com';
   public callbackURL: string = 'http://localhost:8100/oauthcallback.html';
   public oauth: any;
-  public service: any;
 
   constructor(public storage: Storage, public alertCtrl: AlertController) {
     console.log('Hello AuthenticationServiceProvider Provider');
@@ -32,7 +31,7 @@ export class AuthenticationServiceProvider {
     return this.oauth.login().then((oauthData) => {
 
       //create the DataService Instance
-      this.service = DataService.createInstance(oauthData, {proxyURL: "https://adamsappcloud.my.salesforce.com/"});
+      DataService.createInstance(oauthData, {proxyURL: "https://adamsappcloud.my.salesforce.com/"});
       //Store the login details for the necessary data services
       this.storage.set('oauthData', oauthData).then(() => {
 

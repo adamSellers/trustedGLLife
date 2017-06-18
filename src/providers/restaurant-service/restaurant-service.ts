@@ -10,7 +10,6 @@ export class RestaurantServiceProvider {
 
   //properties required for the class
   service: any;
-  restaurants: any;
 
   constructor(public storage: Storage) {
 
@@ -32,10 +31,8 @@ export class RestaurantServiceProvider {
 
   findRestaurants(): Promise<any> {
 
-    this.restaurants = this.service.query(`SELECT id, Name from Restaurant__c`)
+    return this.service.query(`SELECT id, Name from Restaurant__c`)
       .then(response => response.records.map(this.cleanRestaurants));
-
-    return this.restaurants;
 
   }
 

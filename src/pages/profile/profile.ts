@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { UserServiceProvider } from '../../providers/user-service/user-service';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
+import {UserServiceProvider} from '../../providers/user-service/user-service';
 
 
 /**
@@ -26,9 +26,13 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
-    this.userData = this.userService.getUserData();
+    this.userData = this.userService.getUserData().then((userData) => {
 
-    console.log('user data is: ' + JSON.stringify(this.userData));
+      console.log('user data is: ' + JSON.stringify(userData));
+
+    });
+
+
   }
 
 }
