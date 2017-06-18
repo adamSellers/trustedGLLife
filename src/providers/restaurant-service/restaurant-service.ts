@@ -17,6 +17,17 @@ export class RestaurantServiceProvider {
 
   }
 
+
+  findRestaurants() {
+
+    let soql: string = 'SELECT Id, Name from Restaurant__c';
+
+    return this.service.query(soql)
+      .then(response => response.records.map(this.cleanRestaurants));
+
+  }
+
+
   //function to pretty up the data from SF
   cleanRestaurants(restaurants) {
 
@@ -26,13 +37,6 @@ export class RestaurantServiceProvider {
       name: restaurants.Name
 
     }
-
-  }
-
-  findRestaurants(): Promise<any> {
-
-    return this.service.query(`SELECT id, Name from Restaurant__c`)
-      .then(response => response.records.map(this.cleanRestaurants));
 
   }
 

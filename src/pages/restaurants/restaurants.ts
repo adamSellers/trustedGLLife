@@ -44,10 +44,10 @@ export class RestaurantsPage {
   }
 
   findRestaurants(): void {
-    this.restaurantData = this.restaurantService.findRestaurants().then(() => {
+    this.restaurantData = this.restaurantService.findRestaurants().then((restaurants) => {
 
 
-      console.log('response is: ' + JSON.stringify(this.restaurantData));
+      console.log('response is: ' + JSON.stringify(restaurants));
 
     });
   }
